@@ -12,11 +12,7 @@
                 <b-list-group-item
                     v-for="(answer, index) in shuffledAnswers" :key="index"
                     @click.prevent="selectedAnswer(index)"
-                    :class="[
-                        !isAnswered && selectedIndex === index? 'selected-answer' : 
-                        isAnswered && correctIndex === index ? 'correct-answer' :
-                        isAnswered && selectedIndex === index && correctIndex != index ? 'incorrect-answer': ''
-                        ]"
+                    :class="answerClass(index)"
                 >
                     {{answer}}
                 </b-list-group-item>
@@ -31,7 +27,13 @@
 
                 Submit
             </b-button>
-            <b-button @click="next" variant="success" href="#">Next</b-button>
+            <b-button
+                @click="next" 
+                variant="success" 
+                :disabled="index===9"
+            >
+                Next
+            </b-button>
         </b-jumbotron>
     </div>
   </template>
@@ -42,7 +44,8 @@
     props: {
       currentQuestion: Object,
       next: Function,
-      increment: Function
+      increment: Function,
+      index: Number
     },
     data(){
         return{
@@ -87,6 +90,20 @@
             }
             this.isAnswered=true
             this.increment(isCorrect)
+        },
+        answerClass(index){
+            let answerClass=''
+
+            if(!this.isAnswered && this.selectedIndex === index){
+                answerClass='correct_answer'
+            }
+            else if(this.isAnswered && this.correctIndex === index){
+                answerClass='correct-answer'
+            }
+            else if (this.isAnswered && this.selectedIndex === index && this.correctIndex != index){
+                answerClass='incorrect-answer'
+            }
+            return answerClass
         }
     }
   }
@@ -112,7 +129,7 @@
         background-color: lightgreen;
     }
     .incorrect-answer{
-        background-color: lightgoldenrodyellow;
+        background-color: rgb(180, 66, 66);
     }
 
 </style>

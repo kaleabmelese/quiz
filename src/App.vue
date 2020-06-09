@@ -13,6 +13,7 @@
               :currentQuestion="questions[index]"
               :next="next"
               :increment="increment"
+              :index="index"
             />
           </b-col>
         </b-row>  
@@ -40,7 +41,7 @@ export default {
   },
   methods:{
     next (){
-      this.index++
+        this.index++  
     },
     increment(isCorrect){
       if(isCorrect){
