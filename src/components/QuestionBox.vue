@@ -55,14 +55,6 @@
             isAnswered: false
         }
     },
-    computed:{
-        //this one is done once in shiffleAnswers
-        //answers(){
-          //  const answers=[...this.currentQuestion.incorrect_answers]
-            //answers.push(this.currentQuestion.correct_answer)
-            //return answers
-        //}
-    },
     watch:{
         currentQuestion:{
             immediate: true,
